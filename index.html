@@ -452,7 +452,7 @@
       <span>Search</span>
     </button>
     <a class="btn btn-primary" href="mailto:?subject=Bilibili%20Creator%20Application&amp;body=Hi%20Bilibili%20team%2C%20I%27d%20like%20to%20apply%20to%20the%20Global%20Creator%20Program.%0A%0AChannel%2Flinks%3A%0AFollower%20count%3A%0AContent%20niche%3A">Apply Now</a>
-    </div>
+  </div>
 </nav>
 
 <!-- SEARCH OVERLAY -->
@@ -470,33 +470,6 @@
     </div>
   </div>
 </div>
-
-<!-- SIDE MENU -->
-<div class="menu-overlay" id="menuOverlay"></div>
-<aside class="side-menu" id="sideMenu" aria-hidden="true">
-  <div class="sm-top">
-    <span class="sm-title">Jump to</span>
-    <button class="sm-close" id="menuClose" aria-label="Close menu">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    </button>
-  </div>
-  <nav class="sm-nav">
-    <span class="sm-group">Explore</span>
-    <a href="#why" class="sm-link">Why Bilibili</a>
-    <a href="#benefits" class="sm-link">Creator benefits</a>
-    <a href="#process" class="sm-link">How to join</a>
-    <a href="#winning" class="sm-link">First-week playbook</a>
-    <a href="#stories" class="sm-link">Creator stories</a>
-    <a href="#earn" class="sm-link">Monetization</a>
-    <a href="#support" class="sm-link">What we help with</a>
-
-    <span class="sm-group">Q&amp;A topics</span>
-    <div class="sm-faq" id="smFaq"></div>
-  </nav>
-  <div class="sm-foot">
-    <a class="btn btn-primary" style="width:100%;justify-content:center" href="mailto:?subject=Bilibili%20Creator%20Application&amp;body=Hi%20Bilibili%20team%2C%20I%27d%20like%20to%20apply%20to%20the%20Global%20Creator%20Program.%0A%0AChannel%2Flinks%3A%0AFollower%20count%3A%0AContent%20niche%3A">Apply now</a>
-  </div>
-</aside>
 
 <!-- HERO -->
 <header class="hero" id="top">
@@ -605,7 +578,7 @@
   </div>
 </section>
 
-<!-- PROCESS -->
+<!-- MONETIZATION -->
 <section class="sec monetize" id="earn">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -639,7 +612,7 @@
   </div>
 </section>
 
-<!-- SUPPORT -->
+<!-- PROCESS -->
 <section class="sec" id="process" style="background:var(--bg-soft)">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -740,7 +713,7 @@
   </div>
 </section>
 
-<!-- MONETIZATION -->
+<!-- SUPPORT -->
 <section class="sec support" id="support">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -914,28 +887,6 @@ const spy=new IntersectionObserver((es)=>{
   }});
 },{rootMargin:'-30% 0px -60% 0px'});
 groups.forEach(g=>spy.observe(g));
-
-/* ---- side menu ---- */
-const sideMenu=document.getElementById('sideMenu');
-const overlay=document.getElementById('menuOverlay');
-const menuBtn=document.getElementById('menuBtn');
-function openMenu(){sideMenu.classList.add('open');overlay.classList.add('open');sideMenu.setAttribute('aria-hidden','false');menuBtn.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
-function closeMenu(){sideMenu.classList.remove('open');overlay.classList.remove('open');sideMenu.setAttribute('aria-hidden','true');menuBtn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
-menuBtn.onclick=openMenu;
-document.getElementById('menuClose').onclick=closeMenu;
-overlay.onclick=closeMenu;
-addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
-
-/* populate FAQ topics into side menu; clicking jumps to the group and closes */
-const smFaq=document.getElementById('smFaq');
-FAQ.forEach((g,i)=>{
-  const a=document.createElement('a');
-  a.innerHTML=`${g.cat}`;
-  a.onclick=()=>{closeMenu();setTimeout(()=>document.getElementById('fg'+i).scrollIntoView({behavior:'smooth',block:'start'}),260);};
-  smFaq.appendChild(a);
-});
-/* explore links also close the menu */
-document.querySelectorAll('.sm-link').forEach(l=>l.addEventListener('click',()=>setTimeout(closeMenu,40)));
 
 /* nav shadow */
 const nav=document.getElementById('nav');
