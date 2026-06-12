@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join Bilibili as a Creator — Reach a Global Audience</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#FB7299;
+    --pink-deep:#E45A82;
+    --blue:#00AEEC;
+    --blue-deep:#0B84C4;
+    --ink:#14131A;
+    --ink-soft:#3A3845;
+    --mut:#6E6B7B;
+    --line:#E8E6EE;
+    --bg:#FFFFFF;
+    --bg-soft:#F7F6FB;
+    --bg-tint:#F2F5FF;
+    --night:#15131F;
+    --night-2:#1E1B2E;
+    --r:18px;
+    --maxw:1120px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:78px}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:'Sora',sans-serif;line-height:1.12;letter-spacing:-.02em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{
+    font-family:'Sora',sans-serif;font-weight:600;font-size:12px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--pink);display:inline-flex;align-items:center;gap:8px;
+  }
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--pink);border-radius:2px}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px clamp(20px,4vw,40px);
+    background:rgba(255,255,255,.82);backdrop-filter:blur(14px);
+    border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s;
+  }
+  nav.stuck{border-color:var(--line);box-shadow:0 6px 24px rgba(20,19,26,.05)}
+  .brand{display:flex;align-items:center;gap:11px;font-family:'Sora';font-weight:700;font-size:17px}
+  .logo-mark{
+    width:34px;height:34px;border-radius:9px;
+    background:linear-gradient(135deg,var(--blue) 0%,var(--pink) 100%);
+    display:grid;place-items:center;color:#fff;flex:none;
+  }
+  .logo-mark svg{width:19px;height:19px}
+  .brand small{display:block;font-family:'Inter';font-weight:500;font-size:11px;color:var(--mut);letter-spacing:.04em;margin-top:1px}
+  .nav-links{display:flex;align-items:center;gap:28px}
+  .nav-links .nlink{font-size:14.5px;font-weight:500;color:var(--ink-soft);transition:color .2s}
+  .nav-links .nlink:hover{color:var(--pink)}
+  .nav-cta{display:flex;gap:10px;align-items:center}
+  .btn{
+    font-family:'Sora';font-weight:600;font-size:14.5px;border:none;cursor:pointer;
+    padding:11px 22px;border-radius:999px;transition:transform .18s var(--ease),box-shadow .25s,background .2s;
+    display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--pink);color:#fff;box-shadow:0 8px 20px -6px rgba(251,114,153,.55)}
+  .btn-primary:hover{background:var(--pink-deep);box-shadow:0 12px 28px -8px rgba(251,114,153,.7);transform:translateY(-2px)}
+  .btn-ghost{background:#fff;color:var(--blue-deep);border:1.5px solid var(--blue)}
+  .btn-ghost:hover{background:var(--bg-tint);transform:translateY(-2px)}
+  .btn-lg{padding:15px 32px;font-size:16px}
+  .btn-white{background:#fff;color:var(--ink)}
+  .btn-white:hover{background:#f0eef7;transform:translateY(-2px)}
+  .nav-toggle{display:none}
+  .menu-btn{
+    width:42px;height:42px;border-radius:11px;border:1.5px solid var(--line);background:#fff;cursor:pointer;
+    display:grid;place-items:center;color:var(--ink);transition:all .2s;flex:none;
+  }
+  .menu-btn svg{width:22px;height:22px}
+  .menu-btn:hover{border-color:var(--pink);color:var(--pink-deep)}
+
+  /* ---------- SEARCH ---------- */
+  .search-btn{
+    display:flex;align-items:center;gap:8px;height:42px;padding:0 16px;border-radius:11px;cursor:pointer;
+    border:1.5px solid var(--line);background:#fff;color:var(--mut);font-family:'Inter';font-size:14px;font-weight:500;
+    transition:all .2s;
+  }
+  .search-btn svg{width:17px;height:17px}
+  .search-btn:hover{border-color:var(--pink);color:var(--pink-deep)}
+  .search-overlay{
+    position:fixed;inset:0;z-index:130;background:rgba(20,16,30,.5);backdrop-filter:blur(3px);
+    opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;
+    display:flex;align-items:flex-start;justify-content:center;padding:84px 20px 20px;
+  }
+  .search-overlay.open{opacity:1;visibility:visible}
+  .search-panel{
+    width:100%;max-width:640px;background:#fff;border-radius:18px;overflow:hidden;
+    box-shadow:0 40px 90px -28px rgba(20,16,30,.5);transform:translateY(-12px);transition:transform .25s var(--ease);
+    display:flex;flex-direction:column;max-height:78vh;
+  }
+  .search-overlay.open .search-panel{transform:none}
+  .search-box{display:flex;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line)}
+  .search-box>svg{width:22px;height:22px;color:var(--mut);flex:none}
+  .search-box input{flex:1;border:none;outline:none;font-family:'Inter';font-size:17px;color:var(--ink);background:none}
+  .search-box input::placeholder{color:#a9a6b6}
+  .search-close{width:34px;height:34px;border-radius:9px;border:none;background:var(--bg-soft);cursor:pointer;
+    display:grid;place-items:center;color:var(--ink-soft);flex:none;transition:all .18s}
+  .search-close:hover{background:#efe9f4;color:var(--pink-deep)}
+  .search-results{overflow-y:auto;padding:10px}
+  .search-hint,.search-empty{padding:26px 20px;text-align:center;color:var(--mut);font-size:14.5px}
+  .sr-item{display:block;width:100%;text-align:left;background:none;border:none;cursor:pointer;
+    padding:13px 16px;border-radius:12px;transition:background .15s}
+  .sr-item:hover,.sr-item.active{background:var(--bg-tint)}
+  .sr-cat{font-family:'Sora';font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--blue-deep);margin-bottom:3px}
+  .sr-title{font-size:15px;font-weight:600;color:var(--ink);line-height:1.4}
+  .sr-snip{font-size:13px;color:var(--mut);margin-top:3px;line-height:1.45}
+  .sr-item mark{background:rgba(251,114,153,.24);color:inherit;border-radius:3px;padding:0 1px}
+  .sr-count{padding:6px 16px 10px;font-size:12px;color:var(--mut);font-weight:500}
+
+  /* ---------- SIDE MENU ---------- */
+  .menu-overlay{
+    position:fixed;inset:0;background:rgba(20,16,30,.42);backdrop-filter:blur(2px);
+    opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;z-index:110;
+  }
+  .menu-overlay.open{opacity:1;visibility:visible}
+  .side-menu{
+    position:fixed;top:0;right:0;height:100%;width:340px;max-width:88vw;z-index:120;
+    background:#fff;box-shadow:-20px 0 60px -20px rgba(20,16,30,.35);
+    transform:translateX(100%);transition:transform .34s var(--ease);
+    display:flex;flex-direction:column;
+  }
+  .side-menu.open{transform:translateX(0)}
+  .sm-top{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;border-bottom:1px solid var(--line)}
+  .sm-title{font-family:'Sora';font-weight:700;font-size:16px}
+  .sm-close{width:38px;height:38px;border-radius:10px;border:none;background:var(--bg-soft);cursor:pointer;
+    display:grid;place-items:center;color:var(--ink-soft);transition:all .2s}
+  .sm-close:hover{background:#efe9f4;color:var(--pink-deep)}
+  .sm-nav{flex:1;overflow-y:auto;padding:18px 16px;display:block;position:static;background:none;border:none;backdrop-filter:none}
+  .sm-group{display:block;font-family:'Sora';font-weight:700;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--mut);padding:14px 12px 8px}
+  .sm-group:first-child{padding-top:4px}
+  .sm-link{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:11px;
+    font-size:15px;font-weight:500;color:var(--ink-soft);transition:all .18s;cursor:pointer}
+  .sm-link:hover{background:var(--bg-tint);color:var(--ink)}
+  .sm-ic{font-size:16px;width:22px;text-align:center;flex:none}
+  .sm-faq{display:flex;flex-direction:column;gap:1px}
+  .sm-faq a{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:10px;
+    font-size:14px;color:var(--ink-soft);transition:all .18s;cursor:pointer}
+  .sm-faq a:hover{background:rgba(251,114,153,.09);color:var(--pink-deep)}
+  .sm-faq a .e{font-size:14px;flex:none}
+  .sm-foot{padding:18px 22px;border-top:1px solid var(--line)}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;padding:148px 0 96px;overflow:hidden;
+    background:
+      radial-gradient(1100px 520px at 78% -8%, rgba(251,114,153,.20), transparent 60%),
+      radial-gradient(900px 560px at 8% 12%, rgba(0,174,236,.18), transparent 58%),
+      linear-gradient(180deg,#fbfaff 0%,#ffffff 70%);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:54px;align-items:center}
+  .hero h1{font-size:clamp(36px,5.2vw,62px);font-weight:800;margin:20px 0 18px}
+  .hero h1 .grad{
+    background:linear-gradient(100deg,var(--blue) 0%,var(--pink) 90%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p.lead{font-size:19px;color:var(--ink-soft);max-width:520px;margin-bottom:14px}
+  .hero .substat{font-size:14.5px;color:var(--mut);margin-bottom:30px;font-weight:500}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+  .trust{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--mut)}
+  .trust .dot{width:7px;height:7px;border-radius:50%;background:#36c47e;box-shadow:0 0 0 4px rgba(54,196,126,.16)}
+
+  /* hero visual : creator spotlight card */
+  .spotlight-card{
+    position:relative;border-radius:22px;padding:30px;
+    background:linear-gradient(165deg,#ffffff,#fbf9ff);
+    border:1px solid var(--line);
+    box-shadow:0 30px 70px -28px rgba(33,24,60,.32);
+  }
+  .sl-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;gap:12px;flex-wrap:wrap}
+  .sl-kicker{font-family:'Sora';font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink)}
+  .sl-flag{font-size:12px;font-weight:600;color:var(--mut);background:var(--bg-soft);padding:5px 11px;border-radius:999px}
+  .sl-creator{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .sl-ava{width:50px;height:50px;border-radius:14px;flex:none;display:grid;place-items:center;color:#fff;
+    font-family:'Sora';font-weight:700;font-size:22px}
+  .sl-name{font-family:'Sora';font-weight:700;font-size:18px;display:flex;align-items:center;gap:8px}
+  .sl-v{width:18px;height:18px;border-radius:50%;background:var(--pink);color:#fff;font-size:11px;
+    display:inline-grid;place-items:center;font-weight:700}
+  .sl-meta{font-size:13px;color:var(--mut);margin-top:2px}
+  .sl-quote{font-size:18px;line-height:1.5;color:var(--ink);font-weight:500;margin-bottom:22px}
+  .sl-quote em{font-style:italic;color:var(--pink-deep)}
+  .sl-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding-top:20px;border-top:1px solid var(--line)}
+  .sl-stats b{display:block;font-family:'Sora';font-weight:800;font-size:24px;letter-spacing:-.02em;
+    background:linear-gradient(120deg,var(--blue-deep),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sl-stats span{font-size:12.5px;color:var(--mut)}
+  .sl-note{margin-top:18px;font-size:11.5px;color:#9b98a8;line-height:1.5}
+
+  /* ---------- generic section ---------- */
+  section{position:relative}
+  .sec{padding:88px 0}
+  .sec-head{margin-bottom:46px;position:relative}
+  .sec-head h2{font-size:clamp(28px,3.6vw,40px);font-weight:700;margin:14px 0 0}
+  .sec-head p.sub{color:var(--mut);font-size:17px;max-width:620px;margin-top:14px}
+  .watermark{
+    position:absolute;right:0;top:-26px;font-family:'Sora';font-weight:800;
+    font-size:clamp(64px,11vw,128px);letter-spacing:-.04em;color:var(--ink);opacity:.035;
+    pointer-events:none;user-select:none;z-index:0;
+  }
+  .sec-head>*{position:relative;z-index:1}
+
+  /* ---------- STATS ---------- */
+  .stats-band{background:var(--bg-soft)}
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .stat{
+    background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px 24px;
+    transition:transform .25s var(--ease),box-shadow .25s;
+  }
+  .stat:hover{transform:translateY(-4px);box-shadow:0 18px 40px -20px rgba(20,19,26,.2)}
+  .stat .num{font-family:'Sora';font-weight:800;font-size:40px;letter-spacing:-.03em;
+    background:linear-gradient(120deg,var(--blue-deep),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .lab{font-weight:600;font-size:15px;margin:6px 0 4px}
+  .stat .note{font-size:13px;color:var(--mut)}
+  .features-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+  .feat{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+    border-radius:14px;padding:18px 20px}
+  .feat .ic{width:38px;height:38px;border-radius:10px;flex:none;display:grid;place-items:center;
+    background:var(--bg-tint);color:var(--blue-deep)}
+  .feat .ic svg{width:20px;height:20px}
+  .feat h4{font-size:15px;font-weight:600;margin-bottom:3px;font-family:'Sora'}
+  .feat p{font-size:13.5px;color:var(--mut)}
+  .founded{text-align:center;margin-top:30px;font-size:13.5px;color:var(--mut);font-weight:500;letter-spacing:.02em}
+
+  /* ---------- CARD GRID (benefits / monetization) ---------- */
+  .card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px 24px;
+    transition:transform .25s var(--ease),box-shadow .25s,border-color .25s;position:relative;overflow:hidden;
+  }
+  .card::before{content:"";position:absolute;left:0;top:0;height:3px;width:0;
+    background:linear-gradient(90deg,var(--blue),var(--pink));transition:width .35s var(--ease)}
+  .card:hover{transform:translateY(-6px);box-shadow:0 24px 50px -26px rgba(20,19,26,.28);border-color:transparent}
+  .card:hover::before{width:100%}
+  .card .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;margin-bottom:18px;
+    background:linear-gradient(140deg,rgba(0,174,236,.14),rgba(251,114,153,.14));color:var(--pink-deep)}
+  .card .ic svg{width:23px;height:23px}
+  .card h3{font-size:17px;font-weight:600;margin-bottom:9px}
+  .card p{font-size:14px;color:var(--mut)}
+  .monetize{background:var(--bg-soft)}
+
+  /* ---------- PROCESS ---------- */
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;position:relative}
+  .steps::before{content:"";position:absolute;top:27px;left:9%;right:9%;height:2px;
+    background:linear-gradient(90deg,var(--blue),var(--pink));opacity:.35;z-index:0}
+  .step{position:relative;z-index:1;text-align:center;padding:0 6px}
+  .step .circ{width:54px;height:54px;border-radius:50%;margin:0 auto 16px;display:grid;place-items:center;
+    font-family:'Sora';font-weight:700;font-size:18px;color:#fff;
+    background:linear-gradient(140deg,var(--blue),var(--blue-deep));box-shadow:0 8px 18px -6px rgba(0,174,236,.5)}
+  .step:nth-child(n+3) .circ{background:linear-gradient(140deg,#7b86e0,var(--pink));box-shadow:0 8px 18px -6px rgba(251,114,153,.5)}
+  .step h4{font-size:15.5px;font-weight:600;margin-bottom:7px}
+  .step p{font-size:13px;color:var(--mut)}
+  .step .timing{display:inline-block;margin-top:8px;font-size:11.5px;font-weight:600;color:var(--blue-deep);
+    background:var(--bg-tint);padding:3px 10px;border-radius:999px}
+
+  /* ---------- SUPPORT ---------- */
+  .support{background:linear-gradient(180deg,#fff,var(--bg-soft))}
+  .support-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 28px}
+  .sup-item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .sup-item .chk{width:26px;height:26px;border-radius:8px;flex:none;display:grid;place-items:center;
+    background:var(--pink);color:#fff}
+  .sup-item .chk svg{width:14px;height:14px}
+  .sup-item h4{font-size:15.5px;font-weight:600;margin-bottom:2px}
+  .sup-item p{font-size:13.5px;color:var(--mut)}
+
+  /* ---------- QUICK WINS ---------- */
+  .qw{background:var(--night);color:#fff;border-radius:26px;padding:54px clamp(28px,5vw,60px);
+    position:relative;overflow:hidden}
+  .qw::after{content:"";position:absolute;right:-120px;top:-120px;width:380px;height:380px;border-radius:50%;
+    background:radial-gradient(circle,rgba(251,114,153,.4),transparent 65%)}
+  .qw .eyebrow{color:#ff9fbb}.qw .eyebrow::before{background:#ff9fbb}
+  .qw h2{font-size:clamp(26px,3.4vw,36px);font-weight:700;margin:12px 0 8px;position:relative}
+  .qw>.wrap-inner{position:relative;z-index:1}
+  .qw .sub{color:rgba(255,255,255,.62);max-width:560px;margin-bottom:34px}
+  .qw-cols{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+  .qw h4{font-family:'Sora';font-size:14px;letter-spacing:.04em;color:#fff;margin-bottom:16px;
+    display:flex;align-items:center;gap:9px}
+  .qw h4 .tag{font-size:11px;font-weight:600;padding:3px 9px;border-radius:6px}
+  .qw .do .tag{background:rgba(54,196,126,.2);color:#7ee6ab}
+  .qw .dont .tag{background:rgba(255,107,107,.18);color:#ff9b9b}
+  .qw ul{list-style:none}
+  .qw li{display:flex;gap:12px;padding:9px 0;font-size:14.5px;color:rgba(255,255,255,.82);align-items:flex-start}
+  .qw li svg{width:17px;height:17px;flex:none;margin-top:3px}
+  .qw .do li svg{color:#7ee6ab}.qw .dont li svg{color:#ff9b9b}
+  .qw li b{color:#fff;font-weight:600}
+  .qw-cta{margin-top:34px;padding-top:30px;border-top:1px solid rgba(255,255,255,.12);
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .qw-cta-note{font-size:13.5px;color:rgba(255,255,255,.6)}
+
+  /* ---------- REVIEWS ---------- */
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .rev-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px 26px;
+    display:flex;flex-direction:column;transition:transform .25s var(--ease),box-shadow .25s;position:relative;
+  }
+  .rev-card::before{content:"\201C";position:absolute;top:14px;right:24px;font-family:'Sora';
+    font-size:60px;color:var(--pink);opacity:.14;line-height:1}
+  .rev-card:hover{transform:translateY(-5px);box-shadow:0 24px 50px -26px rgba(20,19,26,.26)}
+  .rev-cat{font-family:'Sora';font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--blue-deep);margin-bottom:16px}
+  .rev-quote{font-size:16.5px;line-height:1.55;color:var(--ink);font-weight:500;margin-bottom:22px;flex:1}
+  .rev-foot{display:flex;align-items:center;gap:13px;padding-top:18px;border-top:1px solid var(--line)}
+  .rev-ava{width:44px;height:44px;border-radius:12px;flex:none;display:grid;place-items:center;
+    color:#fff;font-family:'Sora';font-weight:700;font-size:18px}
+  .rev-name{font-family:'Sora';font-weight:700;font-size:15.5px;display:flex;align-items:center;gap:7px}
+  .rv{width:16px;height:16px;border-radius:50%;background:var(--pink);color:#fff;font-size:10px;
+    display:inline-grid;place-items:center;font-weight:700}
+  .rev-handle{font-size:12.5px;color:var(--mut);margin-top:1px}
+  .rev-stat{margin-top:16px;font-size:13px;color:var(--mut)}
+  .rev-stat span{font-family:'Sora';font-weight:800;font-size:17px;color:var(--ink);
+    background:linear-gradient(120deg,var(--blue-deep),var(--pink));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .rev-disclaimer{text-align:center;margin-top:26px;font-size:12px;color:#9b98a8}
+
+  /* ---------- FAQ ---------- */
+  .faq-layout{display:grid;grid-template-columns:230px 1fr;gap:40px;align-items:start}
+  .faq-cats{position:sticky;top:96px;display:flex;flex-direction:column;gap:4px}
+  .faq-cats button{
+    text-align:left;background:none;border:none;cursor:pointer;font-family:'Inter';
+    font-size:14.5px;font-weight:500;color:var(--mut);padding:9px 14px;border-radius:10px;
+    transition:all .18s;display:flex;align-items:center;gap:10px;
+  }
+  .faq-cats button:hover{color:var(--ink);background:var(--bg-soft)}
+  .faq-cats button.active{color:var(--pink-deep);background:rgba(251,114,153,.1);font-weight:600}
+  .faq-cats button .cnt{margin-left:auto;font-size:11px;color:var(--mut);font-weight:600}
+  .faq-group{margin-bottom:38px;scroll-margin-top:96px}
+  .faq-group>h3{font-family:'Sora';font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--blue-deep);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+  .faq-group>h3::after{content:"";flex:1;height:1px;background:var(--line)}
+  .qa{border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden;background:#fff;
+    transition:box-shadow .2s,border-color .2s}
+  .qa[open]{box-shadow:0 12px 30px -18px rgba(20,19,26,.2);border-color:#dcd9e8}
+  .qa summary{
+    cursor:pointer;list-style:none;padding:17px 22px;font-weight:600;font-size:15.5px;
+    display:flex;align-items:center;gap:14px;color:var(--ink);
+  }
+  .qa summary::-webkit-details-marker{display:none}
+  .qa summary .q-ic{margin-left:auto;width:22px;height:22px;flex:none;transition:transform .25s;color:var(--pink)}
+  .qa[open] summary .q-ic{transform:rotate(45deg)}
+  .qa .ans{padding:0 22px 20px;color:var(--ink-soft);font-size:14.5px}
+  .qa .ans .pending{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;
+    color:var(--blue-deep);background:var(--bg-tint);padding:4px 11px;border-radius:999px;margin-top:2px}
+  .faq-foot{margin-top:8px;padding:24px;border-radius:16px;background:var(--bg-tint);
+    display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .faq-foot p{font-weight:500;font-size:15px}.faq-foot p span{display:block;font-size:13px;color:var(--mut);font-weight:400;margin-top:3px}
+
+  /* ---------- FINAL CTA ---------- */
+  .final{
+    background:
+      radial-gradient(800px 400px at 20% 0%,rgba(0,174,236,.5),transparent 60%),
+      radial-gradient(800px 460px at 90% 100%,rgba(251,114,153,.55),transparent 60%),
+      var(--night);
+    color:#fff;text-align:center;padding:96px 0;
+  }
+  .final h2{font-size:clamp(30px,4.5vw,52px);font-weight:800;margin-bottom:16px}
+  .final p{color:rgba(255,255,255,.78);font-size:18px;max-width:520px;margin:0 auto 34px}
+  .final-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:22px}
+  .final .mail{font-size:14.5px;color:rgba(255,255,255,.7)}
+  .final .mail a{color:#fff;font-weight:600;border-bottom:1px solid rgba(255,255,255,.4)}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--night-2);color:rgba(255,255,255,.66);padding:56px 0 28px}
+  .foot-grid{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;flex-wrap:wrap;padding-bottom:36px;
+    border-bottom:1px solid rgba(255,255,255,.1)}
+  .foot-cta{display:flex;gap:12px;flex-wrap:wrap}
+  .btn-discord{background:#5865F2;color:#fff}
+  .btn-discord:hover{background:#4752c4;transform:translateY(-2px)}
+  .foot-brand .brand{color:#fff}
+  .foot-brand p{font-size:13.5px;margin-top:14px;max-width:240px;color:rgba(255,255,255,.5)}
+  .foot-col h5{font-family:'Sora';font-size:13px;color:#fff;margin-bottom:14px;letter-spacing:.04em}
+  .foot-col a{display:block;font-size:13.5px;padding:5px 0;color:rgba(255,255,255,.58);transition:color .18s}
+  .foot-col a:hover{color:var(--pink)}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:22px;
+    font-size:13px;color:rgba(255,255,255,.42);flex-wrap:wrap;gap:14px}
+  .socials{display:flex;gap:10px}
+  .socials a{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;
+    background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);transition:all .2s}
+  .socials a:hover{background:var(--pink);color:#fff;transform:translateY(-2px)}
+  .socials svg{width:16px;height:16px}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:980px){
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+    .player{max-width:520px}
+    .stat-grid,.card-grid{grid-template-columns:repeat(2,1fr)}
+    .features-row{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr;gap:0}
+    .steps::before{display:none}
+    .step{display:grid;grid-template-columns:54px 1fr;gap:18px;text-align:left;padding:14px 0;
+      border-left:2px solid var(--line);margin-left:26px;padding-left:24px}
+    .step .circ{margin:0}
+    .support-grid,.qw-cols{grid-template-columns:1fr}
+    .faq-layout{grid-template-columns:1fr}
+    .faq-cats{position:static;flex-direction:row;flex-wrap:wrap;margin-bottom:24px}
+  }
+  @media(max-width:640px){
+    .nav-links{display:none}
+    .search-btn span{display:none}
+    .search-btn{padding:0;width:42px;justify-content:center}
+    .hero{padding:120px 0 70px}
+    .stat-grid,.card-grid{grid-template-columns:1fr}
+    .faq-foot{flex-direction:column;align-items:flex-start}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#top" class="brand">
+    <span class="logo-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M5 7h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z" stroke="#fff" stroke-width="2"/><path d="M8 4l2 3M16 4l-2 3" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="13" r="1.3" fill="#fff"/><circle cx="15" cy="13" r="1.3" fill="#fff"/></svg>
+    </span>
+    <span>Bilibili<small>Global Creator Program</small></span>
+  </a>
+  <div class="nav-links">
+    <a class="nlink" href="#why">Why Bilibili</a>
+    <a class="nlink" href="#benefits">Benefits</a>
+    <a class="nlink" href="#process">How to Join</a>
+    <a class="nlink" href="#stories">Stories</a>
+    <a class="nlink" href="#earn">Earnings</a>
+    <a class="nlink" href="#faq">Q&amp;A</a>
+  </div>
+  <div class="nav-cta">
+    <button class="search-btn" id="searchBtn" aria-label="Search the page">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>Search</span>
+    </button>
+    <a class="btn btn-primary" href="mailto:?subject=Bilibili%20Creator%20Application&amp;body=Hi%20Bilibili%20team%2C%20I%27d%20like%20to%20apply%20to%20the%20Global%20Creator%20Program.%0A%0AChannel%2Flinks%3A%0AFollower%20count%3A%0AContent%20niche%3A">Apply Now</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay" aria-hidden="true">
+  <div class="search-panel" role="dialog" aria-label="Search">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="searchInput" placeholder="Search for a topic or question — try &quot;payouts&quot;, &quot;handle&quot;, &quot;copyright&quot;" autocomplete="off">
+      <button class="search-close" id="searchClose" aria-label="Close search">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <div class="search-hint">Start typing to search across the whole page — sections and every Q&amp;A.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SIDE MENU -->
+<div class="menu-overlay" id="menuOverlay"></div>
+<aside class="side-menu" id="sideMenu" aria-hidden="true">
+  <div class="sm-top">
+    <span class="sm-title">Jump to</span>
+    <button class="sm-close" id="menuClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <nav class="sm-nav">
+    <span class="sm-group">Explore</span>
+    <a href="#why" class="sm-link">Why Bilibili</a>
+    <a href="#benefits" class="sm-link">Creator benefits</a>
+    <a href="#process" class="sm-link">How to join</a>
+    <a href="#winning" class="sm-link">First-week playbook</a>
+    <a href="#stories" class="sm-link">Creator stories</a>
+    <a href="#earn" class="sm-link">Monetization</a>
+    <a href="#support" class="sm-link">What we help with</a>
+
+    <span class="sm-group">Q&amp;A topics</span>
+    <div class="sm-faq" id="smFaq"></div>
+  </nav>
+  <div class="sm-foot">
+    <a class="btn btn-primary" style="width:100%;justify-content:center" href="mailto:?subject=Bilibili%20Creator%20Application&amp;body=Hi%20Bilibili%20team%2C%20I%27d%20like%20to%20apply%20to%20the%20Global%20Creator%20Program.%0A%0AChannel%2Flinks%3A%0AFollower%20count%3A%0AContent%20niche%3A">Apply now</a>
+  </div>
+</aside>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow reveal">For overseas creators</span>
+      <h1 class="reveal">Reach a global audience.<br><span class="grad">Join Bilibili as a creator.</span></h1>
+      <p class="lead reveal">Bring your channel to one of the world's most engaged video communities — and get a dedicated team, a verified handle, and a launch traffic boost to grow from day one.</p>
+      <p class="substat reveal">117M daily active users · 112 min average daily watch time · 90%+ creator-made content</p>
+      <div class="hero-actions reveal">
+        <a class="btn btn-primary btn-lg" href="mailto:?subject=Bilibili%20Creator%20Application&amp;body=Hi%20Bilibili%20team%2C%20I%27d%20like%20to%20apply%20to%20the%20Global%20Creator%20Program.%0A%0AChannel%2Flinks%3A%0AFollower%20count%3A%0AContent%20niche%3A">Apply now</a>
+        <a class="btn btn-ghost btn-lg" href="https://discord.gg/H3DC6Pkcjp" target="_blank" rel="noopener">Want to learn more</a>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="spotlight-card">
+        <div class="sl-head">
+          <span class="sl-kicker">Creator spotlight</span>
+          <span class="sl-flag">International creators on Bilibili</span>
+        </div>
+        <div class="sl-creator">
+          <span class="sl-ava" style="background:linear-gradient(135deg,#6d5bd0,#fb7299)">S</span>
+          <div>
+            <div class="sl-name">Shoto <span class="sl-v" title="Verified">✓</span></div>
+            <div class="sl-meta">VTuber · English / bilingual</div>
+          </div>
+        </div>
+        <p class="sl-quote">"My first upload was a 50-second clip — it hit the daily #1 spot. The audience here shows up <em>fast</em> when they like you."</p>
+        <div class="sl-stats">
+          <div><b>2.8M</b><span>views, first video</span></div>
+          <div><b>Top 3</b><span>paid subscriber chart</span></div>
+        </div>
+        <div class="sl-note">Illustrative spotlight based on documented creator results · full interviews coming soon</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- WHY / STATS -->
+<section class="sec stats-band" id="why">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="watermark">Platform</span>
+      <span class="eyebrow">Why Bilibili</span>
+      <h2>The home of a young, loyal, hard-to-reach audience</h2>
+      <p class="sub">What began in 2009 has grown into a full-spectrum culture hub. Today creators thrive across dozens of categories — knowledge and education, technology and AI, lifestyle, food, fashion, music, gaming, animation and more — all backed by a deeply engaged, young, global community.</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat reveal"><div class="num">117M+</div><div class="lab">Daily active users</div><div class="note">One of the world's most engaged video communities</div></div>
+      <div class="stat reveal"><div class="num">86%</div><div class="lab">Users under 35</div><div class="note">Reach a highly sought-after young audience</div></div>
+      <div class="stat reveal"><div class="num">112 min</div><div class="lab">Avg. daily watch time</div><div class="note">Unusually high time-on-platform</div></div>
+      <div class="stat reveal"><div class="num">90%+</div><div class="lab">Creator-made content</div><div class="note">A genuinely creator-powered ecosystem</div></div>
+    </div>
+
+    <div class="features-row">
+      <div class="feat reveal">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v10H7l-3 3V5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M7 9h6M7 12h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <div><h4>Danmu — bullet comments</h4><p>Real-time comments float across the video, so fans watch together rather than alone.</p></div>
+      </div>
+      <div class="feat reveal">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="m12 3 2.3 4.7 5.2.8-3.8 3.6.9 5.1L12 14.8 7.4 17.2l.9-5.1L4.5 8.5l5.2-.8L12 3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <div><h4>Triple support</h4><p>Like → Coin → Favorite. Three escalating ways for fans to back your work.</p></div>
+      </div>
+      <div class="feat reveal">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/></svg></span>
+        <div><h4>Formal member exam</h4><p>New users pass a community quiz before full access — keeping the community high-quality.</p></div>
+      </div>
+    </div>
+    <p class="founded reveal">Founded in 2009 · Listed on NASDAQ since 2018</p>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="sec" id="benefits">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="watermark">Benefits</span>
+      <span class="eyebrow">What you get</span>
+      <h2>Creator benefits, from your very first day</h2>
+      <p class="sub">Onboarding through the official program comes with perks that local creators rarely get access to.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card reveal">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3>Verified status &amp; custom handle</h3>
+        <p>Get a yellow-V verified badge and a Romanized custom handle — an invite-only feature most local creators never unlock. Build instant credibility and stay brand-consistent across platforms.</p>
+      </div>
+      <div class="card reveal">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 16l5-5 4 3 6-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7h4v4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3>Launch traffic boost</h3>
+        <p>A time-limited homepage recommendation slot in your first month to kickstart growth and get discovered while the overseas-creator space is still wide open.</p>
+      </div>
+      <div class="card reveal">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 13a8 8 0 0 1 16 0v4a2 2 0 0 1-2 2h-1v-6h3M4 13v4a2 2 0 0 0 2 2h1v-6H4" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <h3>Dedicated operations team</h3>
+        <p>Direct 1-on-1 support from Bilibili's creator ops team, plus a priority channel for quick answers when something needs resolving fast.</p>
+      </div>
+      <div class="card reveal">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M13 3L4 14h7l-1 7 9-11h-7l1-7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+        <h3>Early access &amp; insider perks</h3>
+        <p>Be first to try new platform features. Exclusive creator events, beta programs, and insider updates straight from the team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec" id="process" style="background:var(--bg-soft)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="watermark">Process</span>
+      <span class="eyebrow">How to join</span>
+      <h2>Five clear steps from application to launch</h2>
+      <p class="sub">No guesswork. Here's exactly what happens after you reach out.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="circ">01</div><div><h4>Submit application</h4><p>Send your channel info and a few content samples to our team.</p></div></div>
+      <div class="step reveal"><div class="circ">02</div><div><h4>Qualification review</h4><p>We review your application and creator credentials.</p></div></div>
+      <div class="step reveal"><div class="circ">03</div><div><h4>Platform review</h4><p>Bilibili reviews your content quality and fit.<span class="timing">3–5 business days</span></p></div></div>
+      <div class="step reveal"><div class="circ">04</div><div><h4>Sign agreement</h4><p>Review and sign the creator cooperation agreement digitally.</p></div></div>
+      <div class="step reveal"><div class="circ">05</div><div><h4>Onboarding complete</h4><p>Welcome aboard. Your dedicated ops manager guides your next steps.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK WINS -->
+<section class="sec" id="winning">
+  <div class="wrap reveal">
+    <div class="qw">
+      <div class="wrap-inner">
+        <span class="eyebrow">Your first week</span>
+        <h2>Want personalized support from day one?</h2>
+        <p class="sub">You won't figure out a new platform alone. Your dedicated manager works with you on the moves that matter early — what to post, when, and how to grow fast. Here's a taste of the playbook they'll tailor to your channel.</p>
+        <div class="qw-cols">
+          <div class="do">
+            <h4>What your manager helps you nail <span class="tag">High impact</span></h4>
+            <ul>
+              <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>A self-intro that converts.</b> Under 2 minutes, your skill shown in the first 15 seconds, pinned to your profile.</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>A hook in the first 3 seconds.</b> Open on your strongest moment — we'll help you find it.</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>A posting rhythm that the platform rewards.</b> The right days, times and cadence for your niche.</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Early engagement that compounds.</b> How to turn your first commenters into a founding community.</span></li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h4>And the traps they help you skip <span class="tag">Save your energy</span></h4>
+            <ul>
+              <li><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span><b>Chasing perfection.</b> A good video today beats a perfect one next week.</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span><b>Spreading too thin.</b> One clear lane for your first videos so the platform reads your signal.</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span><b>Over-editing.</b> Simple cuts are standard here — no elaborate transitions needed.</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span><b>Guesswork.</b> We share what's already working for other international creators.</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="qw-cta">
+          <a class="btn btn-primary btn-lg" href="https://discord.gg/H3DC6Pkcjp" target="_blank" rel="noopener">Get personalized support</a>
+          <span class="qw-cta-note">Talk to a manager and other creators in our Discord — no commitment.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREATOR REVIEWS / INTERVIEWS -->
+<section class="sec reviews" id="stories">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="watermark">Stories</span>
+      <span class="eyebrow">From the creators</span>
+      <h2>International creators, in their own words</h2>
+      <p class="sub">Short spotlights from overseas creators who've built an audience on Bilibili. Full video interviews are on the way — want to be featured? <a href="mailto:?subject=I'd%20like%20to%20be%20featured%20as%20a%20Bilibili%20creator&amp;body=Hi%20Bilibili%20team%2C%20I'm%20an%20overseas%20creator%20and%20I'd%20be%20happy%20to%20share%20my%20story." style="color:var(--pink-deep);font-weight:600;border-bottom:1px solid rgba(251,114,153,.4)">Get in touch</a>.</p>
+    </div>
+
+    <div class="rev-grid">
+      <article class="rev-card reveal">
+        <div class="rev-cat">VTuber · Entertainment</div>
+        <p class="rev-quote">"My first upload was a 50-second clip and it hit the daily #1 spot. The audience here shows up fast when they connect with you."</p>
+        <div class="rev-foot">
+          <span class="rev-ava" style="background:linear-gradient(135deg,#6d5bd0,#fb7299)">S</span>
+          <div><div class="rev-name">Shoto <span class="rv">✓</span></div><div class="rev-handle">English / bilingual VTuber</div></div>
+        </div>
+        <div class="rev-stat"><span>2.8M</span> views on first video</div>
+      </article>
+
+      <article class="rev-card reveal">
+        <div class="rev-cat">Comedy · Reaction</div>
+        <p class="rev-quote">"Being the curious outsider is its own niche. People here are genuinely interested in how the rest of the world sees their culture."</p>
+        <div class="rev-foot">
+          <span class="rev-ava" style="background:linear-gradient(135deg,#00aeec,#3bd1a3)">J</span>
+          <div><div class="rev-name">Jayus <span class="rv">✓</span></div><div class="rev-handle">American comedy creator</div></div>
+        </div>
+        <div class="rev-stat"><span>1.5M+</span> followers</div>
+      </article>
+
+      <article class="rev-card reveal">
+        <div class="rev-cat">Reviews · Cross-cultural</div>
+        <p class="rev-quote">"I found a small, underserved niche and went deep. Genuine passion builds a tighter community than chasing big numbers ever did."</p>
+        <div class="rev-foot">
+          <span class="rev-ava" style="background:linear-gradient(135deg,#f0883e,#fb7299)">St</span>
+          <div><div class="rev-name">SteveMRE <span class="rv">✓</span></div><div class="rev-handle">Cross-cultural reviews</div></div>
+        </div>
+        <div class="rev-stat"><span>800K+</span> followers</div>
+      </article>
+    </div>
+    <p class="rev-disclaimer reveal">Spotlights are illustrative, based on publicly documented results from these creators. Full interviews coming soon.</p>
+  </div>
+</section>
+
+<!-- MONETIZATION -->
+<section class="sec monetize" id="earn">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="watermark">Earning</span>
+      <span class="eyebrow">Monetization</span>
+      <h2>Multiple ways to earn</h2>
+      <p class="sub">Stack revenue streams as your channel grows. All channels open to verified overseas creators once identity verification is complete.</p>
+    </div>
+    <div class="card-grid">
+      <div class="card reveal">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/><path d="M12 7v10M9.5 9.5a2.5 2 0 0 1 5 0c0 1-.8 1.6-2.5 2s-2.5 1-2.5 2a2.5 2 0 0 0 5 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+        <h3>Creator Incentive Plan</h3>
+        <p>Revenue based on views, watch time and engagement. Base incentive up to ¥2,000/month, with ad revenue sharing as you scale.</p>
+      </div>
+      <div class="card reveal">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M5 6h15l-1.5 9h-12L5 6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M5 6L4 3H2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="8" cy="19" r="1.4" fill="currentColor"/><circle cx="16" cy="19" r="1.4" fill="currentColor"/></svg></span>
+        <h3>Commerce &amp; affiliate</h3>
+        <p>CPS commission through Taobao, JD.com and partner platforms. Earn from product links in videos, livestreams and your storefront.</p>
+      </div>
+      <div class="card reveal">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="2"/><path d="M4 19a5 5 0 0 1 10 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M16 6a3 3 0 0 1 0 6M19 19a5 5 0 0 0-3-4.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <h3>Charging plan (subscriptions)</h3>
+        <p>A fan subscription model — you keep 70% of monthly subscription revenue. Offer exclusive content to paying members.</p>
+      </div>
+      <div class="card reveal">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <h3>Huahuo platform</h3>
+        <p>Bilibili's official brand-collaboration marketplace. Get matched with brands looking for creators in your niche.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section class="sec support" id="support">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="watermark">Support</span>
+      <span class="eyebrow">What we help with</span>
+      <h2>You won't be navigating a new market alone</h2>
+      <p class="sub">From account setup to content strategy — we lower the language and operations barrier so you can focus on creating.</p>
+    </div>
+    <div class="support-grid">
+      <div class="sup-item reveal"><span class="chk"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h4>Account setup &amp; profile optimization</h4><p>Bio translation, profile tuning, and best-practice setup.</p></div></div>
+      <div class="sup-item reveal"><span class="chk"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h4>Content strategy &amp; translation</h4><p>Guidance on what resonates with Chinese audiences.</p></div></div>
+      <div class="sup-item reveal"><span class="chk"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h4>Analytics &amp; performance insights</h4><p>Data-driven recommendations to grow faster.</p></div></div>
+      <div class="sup-item reveal"><span class="chk"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h4>Copyright protection &amp; anti-piracy</h4><p>We help protect your content rights on-platform.</p></div></div>
+      <div class="sup-item reveal"><span class="chk"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h4>Identity &amp; yellow-V verification</h4><p>Fast-track support through the verification process.</p></div></div>
+      <div class="sup-item reveal"><span class="chk"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><h4>Monetization strategy consulting</h4><p>Help maximizing your earning potential on Bilibili.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="watermark">Answers</span>
+      <span class="eyebrow">Q&amp;A</span>
+      <h2>Everything you might want to know first</h2>
+      <p class="sub">The questions overseas creators ask most, grouped by topic. Don't see yours? Reach out and we'll answer directly.</p>
+    </div>
+
+    <div class="faq-layout">
+      <aside class="faq-cats" id="faqCats"></aside>
+      <div class="faq-body" id="faqBody"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="apply">
+  <div class="wrap">
+    <h2 class="reveal">Ready to reach a global audience?</h2>
+    <p class="reveal">The overseas creator space is still new and competition is low. Apply now, or reach out with questions — our team is here to help.</p>
+    <div class="final-actions reveal">
+      <a class="btn btn-white btn-lg" href="mailto:?subject=Bilibili%20Creator%20Application&amp;body=Hi%20Bilibili%20team%2C%20I%27d%20like%20to%20apply%20to%20the%20Global%20Creator%20Program.%0A%0AChannel%2Flinks%3A%0AFollower%20count%3A%0AContent%20niche%3A">Apply now</a>
+      <a class="btn btn-ghost btn-lg" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.5)" href="https://discord.gg/H3DC6Pkcjp" target="_blank" rel="noopener">Want to learn more</a>
+    </div>
+    <p class="mail reveal">Or email us directly at <a href="mailto:?subject=Bilibili%20Creator%20Program%20enquiry">our creator team</a></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="brand">
+          <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 7h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z" stroke="#fff" stroke-width="2"/><path d="M8 4l2 3M16 4l-2 3" stroke="#fff" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="13" r="1.3" fill="#fff"/><circle cx="15" cy="13" r="1.3" fill="#fff"/></svg></span>
+          <span>Bilibili</span>
+        </a>
+        <p>The Global Creator Program — connecting the world's creators with a young, global community.</p>
+      </div>
+      <div class="foot-cta">
+        <a class="btn btn-primary" href="mailto:?subject=Bilibili%20Creator%20Application&amp;body=Hi%20Bilibili%20team%2C%20I%27d%20like%20to%20apply%20to%20the%20Global%20Creator%20Program.%0A%0AChannel%2Flinks%3A%0AFollower%20count%3A%0AContent%20niche%3A">Apply now</a>
+        <a class="btn btn-discord" href="https://discord.gg/H3DC6Pkcjp" target="_blank" rel="noopener">Join our Discord</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Bilibili Inc. All rights reserved.</span>
+      <div class="socials">
+        <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 3h3l-7 8 8 10h-6l-5-6-5 6H3l7-9L3 3h6l4 5 4-5Z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3-.4-4.4a2.5 2.5 0 0 0-1.8-1.8C18.3 5.4 12 5.4 12 5.4s-6.3 0-7.8.4A2.5 2.5 0 0 0 2.4 7.6C2 9 2 12 2 12s0 3 .4 4.4a2.5 2.5 0 0 0 1.8 1.8c1.5.4 7.8.4 7.8.4s6.3 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8C22 15 22 12 22 12Zm-12 3V9l5 3-5 3Z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---- FAQ DATA (from FAQ question doc; answers drawn from onboarding guide where available) ---- */
+const FAQ = [
+  { cat:"Community", items:[
+    {q:"What's the community like?", a:"Highly interactive and loyalty-driven, organized around interest-based communities like anime, gaming, tech, lifestyle and knowledge. Users average 112 minutes a day, and the platform is known for strong creator–fan relationships and as a birthplace of internet culture in China."},
+    {q:"What is Danmu (bullet comments)?", a:"Real-time comments that scroll across the screen as a video plays, creating a shared viewing experience where your audience watches together rather than alone. It's one of Bilibili's signature features."},
+    {q:"What is 'Triple Support' (Like, Coin, Favorite)?", a:"Three ways fans signal support. Like is quick appreciation, Coin is a stronger, higher-value signal, and Favorite means saving for long-term value. Coins are a meaningful engagement metric unique to Bilibili."},
+    {q:"Will other creators or the community help me get started?", a:"Yes. Onboarding includes community engagement support and a dedicated manager. We also invite creators into a Discord channel to ask questions directly to other creators and managers before committing."},
+    {q:"Are there international creators on the platform now, and do they get support from the Chinese audience?", a:"Yes. Foreign creators like VTuber NicoNicoDan (2M+ followers) and reaction creator Jayus (1.5M+) have grown large, engaged followings. Chinese audiences are especially welcoming to overseas creators who respect the culture — and creators who attempt even a little Chinese tend to see noticeably warmer reception."},
+  ]},
+  { cat:"Onboarding", items:[
+    {q:"How do I open a Bilibili account as an overseas creator?", a:"Once invited through the official creator program, your dedicated manager helps you set up the account, including profile and bio translation. Invited international creators are automatically whitelisted, so you also get custom-handle access from day one."},
+    {q:"Why do I need to verify with a phone number and passport?", a:"Real-name verification with a valid passport is what unlocks full creator features and every monetization channel. It confirms your identity to the platform and is required before you can earn."},
+    {q:"How do I upload videos?", a:"Uploads go through Bilibili's creator studio. Recommended specs: 1080p or higher, 16:9 (vertical and square are also supported), 30fps+ (60fps for gaming/motion), MP4/H.264, up to 8GB per video. Your ops manager walks you through your first upload."},
+    {q:"Is there an English app or interface?", a:"The platform is primarily Chinese-language, which is exactly why onboarding includes profile, bio and content translation support, plus a dedicated manager to help you navigate the interface as you get set up.", pending:true},
+    {q:"Do I need to make content specifically for Bilibili, or can I reuse my existing videos?", a:"You can bring your existing content. Many overseas creators start by adapting videos they already have — and we help with translation, subtitles and reformatting so your back catalog works for a Chinese audience."},
+    {q:"An account already exists for me — how do I claim it?", a:"If there's an existing or re-uploaded account associated with you, raise it with your onboarding manager during application. The team handles account claims and ownership as part of the verification process.", pending:true},
+    {q:"Why do I need a welcome video, and are there requirements?", a:"Your self-intro video is your profile's main conversion tool — it turns visitors into followers and signals your niche to the recommendation system. Keep it under 2 minutes, show your skill in the first 15 seconds, and pin it to your profile. Authentic beats polished here."},
+  ]},
+  { cat:"Onboarding timeline", items:[
+    {q:"How long does onboarding take?", a:"The five-step flow runs from application to launch, with the official platform review taking about 3–5 business days. Qualification review and agreement signing happen around that window, so most creators are live shortly after approval."},
+    {q:"Is there a traffic boost when I start, and how long does it last?", a:"Yes. New overseas creators get a time-limited launch boost — a homepage recommendation slot in your first month — to help you get discovered while the international space is still uncrowded."},
+    {q:"What other perks do I get as an early Bilibili creator?", a:"Invite-only custom handle access, yellow-V verified status, a dedicated 1-on-1 ops manager, early access to new features, and invitations to exclusive creator events and beta programs."},
+  ]},
+  { cat:"Monetization", items:[
+    {q:"What are your monetization channels?", a:"Several streams: the Creator Incentive Plan (platform rewards based on views, watch time and engagement, base incentive up to ¥2,000/month), Commerce & Affiliate (CPS commission via Taobao, JD and partners), the Charging plan (fan subscriptions, you keep 70%), and the Huahuo brand-collaboration marketplace. Live-stream gifts are also available."},
+    {q:"What does the revenue share look like for early or overseas creators?", a:"For the Charging subscription plan, creators keep 70% of monthly subscription revenue after platform costs. Incentive-plan rates vary by category, with knowledge and education content typically earning higher per-view rates than entertainment.", pending:true},
+    {q:"Are there minimum thresholds to start earning, and when are payouts made?", a:"The Creator Incentive Plan generally requires 1,000+ followers and 100K+ total views to apply. Payments are calculated monthly: earnings from one month become withdrawable the next (usually mid-month), once you've bound a valid payout method and met the minimum withdrawal threshold."},
+    {q:"Can I withdraw to my international bank account?", a:"Yes. International creators can use international bank transfer or supported services like Payoneer. Note some international methods have higher minimums or longer processing times, and Bilibili handles withholding per Chinese tax regulations — consult a tax professional about double-taxation treaties."},
+    {q:"Is advertising or brand monetization available to me as an overseas creator right now?", a:"Brand collaboration via the Huahuo marketplace is available to verified creators, and you can always arrange independent sponsorships directly. Some integrated-ad products are still being rolled out for overseas creators.", pending:true},
+  ]},
+  { cat:"Content categories", items:[
+    {q:"What kinds of content perform well on Bilibili?", a:"Core strengths are Animation (anime and donghua), Gaming and Comics. Fast-growing areas include Knowledge & Education (science, finance, tutorials, languages), Technology (reviews, AI, programming, automotive), and Lifestyle & Entertainment (food, fashion, vlogs, travel, fitness, music, film and TV). Emerging niches: automotive, pets, handicraft, and VTubers."},
+    {q:"Is there an audience for AI, tech or knowledge content?", a:"Yes. Technology is a high-value space and Knowledge is one of the fastest-growing flagship sections. The audience skews young and highly engaged, with 86% of monthly users under 35."},
+    {q:"Can we do short and vertical videos?", a:"Yes. While 16:9 horizontal is Bilibili's native format, vertical (9:16) and square videos are fully supported and work well for specific content types."},
+  ]},
+  { cat:"Why join now", items:[
+    {q:"Why should I join now?", a:"The international creator space is still new, so competition among overseas creators is low, and Bilibili's community has a track record of supporting international creators. You also get dedicated manager support, a launch traffic boost, and community engagement to speed up onboarding and growth."},
+    {q:"What kind of support do I get?", a:"A dedicated manager, onboarding assistance including help opening the account, profile and content translation, community engagement, and — for new creators — a time-limited traffic boost."},
+  ]},
+  { cat:"AI translation", items:[
+    {q:"How does the AI translation work?", a:"Translation support is part of onboarding, covering bios, titles, post copy and subtitles so your content reaches a Chinese-speaking audience. Your manager can walk you through the current workflow during setup.", pending:true},
+    {q:"Is my voice cloned or synthesized, and can I review translations before they go live?", a:"This is handled case by case during onboarding. Raise your preferences with your manager so review and approval steps are set up the way you're comfortable with before anything is published.", pending:true},
+    {q:"Who owns the translated versions of my content?", a:"The legal team has confirmed that creators do not hold rights to the subtitle translations. Your manager can walk you through the full terms during agreement signing."},
+  ]},
+  { cat:"Policies & copyright", items:[
+    {q:"Who owns the copyright of the content, and of the translation?", a:"You retain ownership of your original content. Subtitle translations are a separate case — the legal team has confirmed creators do not hold rights to the translated subtitles. Full terms are covered in the cooperation agreement."},
+    {q:"Can you take unauthorized or pirated content off the platform?", a:"Yes. Copyright protection and anti-piracy assistance are part of creator support, and Bilibili operates a three-strike system plus content-ID matching for major rights-holders. We help protect your content rights on-platform."},
+    {q:"Can old videos re-uploaded without my involvement be removed once I join?", a:"Yes — this is exactly the kind of thing the anti-piracy and copyright support helps with. Flag any unauthorized re-uploads to your ops manager and the team works to get them removed."},
+    {q:"What are Bilibili's content restrictions?", a:"Content must comply with Chinese law and platform policy. Prohibited areas include politically sensitive topics, pornography and excessive violence, illegal activity, hate speech, copyright infringement, health/finance misinformation, and gambling or unlicensed financial advice. When in doubt, avoid politically or socially sensitive subjects."},
+  ]},
+  { cat:"Privacy & data", items:[
+    {q:"What data is collected from creators and viewers, and where is it stored?", a:"Data handling follows Bilibili's privacy policy and Chinese data regulations. The specifics for your account and region are covered during onboarding — your manager can point you to the exact terms before you sign.", pending:true},
+    {q:"Will my verification data be stored?", a:"Verification data is retained as required for real-name verification under platform and regulatory rules. The retention terms are part of the privacy policy reviewed during agreement signing.", pending:true},
+    {q:"Will my identity be exposed if I pass 500k followers?", a:"Your real-name verification data is used for identity confirmation and payouts, not public display — your public profile shows your handle and display name. If you have specific privacy concerns at scale, raise them with your manager during onboarding.", pending:true},
+    {q:"Who is my identity shared with, and can I stay anonymous?", a:"Your verified identity is used internally for verification and payment, while your public presence runs on your handle and display name. Anonymity expectations should be confirmed with your manager before signing, since verification itself is required to monetize.", pending:true},
+  ]},
+];
+
+/* build category nav + groups */
+const cats = document.getElementById('faqCats');
+const body = document.getElementById('faqBody');
+FAQ.forEach((g,i)=>{
+  const id = 'fg'+i;
+  const btn = document.createElement('button');
+  btn.innerHTML = `${g.cat}<span class="cnt">${g.items.length}</span>`;
+  btn.dataset.target = id;
+  if(i===0) btn.classList.add('active');
+  btn.onclick = ()=>document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+  cats.appendChild(btn);
+
+  const group = document.createElement('div');
+  group.className='faq-group'; group.id=id;
+  group.innerHTML = `<h3>${g.cat}</h3>`;
+  g.items.forEach(it=>{
+    const d=document.createElement('details'); d.className='qa';
+    const pend = it.pending ? `<div style="margin-top:10px"><span class="pending">✦ Your manager confirms specifics during onboarding</span></div>` : '';
+    d.innerHTML = `<summary>${it.q}<svg class="q-ic" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></summary><div class="ans">${it.a}${pend}</div>`;
+    group.appendChild(d);
+  });
+  body.appendChild(group);
+});
+/* footer CTA inside FAQ body */
+const ff=document.createElement('div'); ff.className='faq-foot';
+ff.innerHTML=`<p>Still have a question?<span>We'll answer directly before you commit to anything.</span></p><a class="btn btn-primary" href="mailto:?subject=Question%20about%20joining%20Bilibili&body=Hi%20Bilibili%20team%2C%20my%20question%20is%3A">Ask the team</a>`;
+body.appendChild(ff);
+
+/* active category on scroll */
+const groups=[...document.querySelectorAll('.faq-group')];
+const catBtns=[...cats.querySelectorAll('button')];
+const spy=new IntersectionObserver((es)=>{
+  es.forEach(e=>{if(e.isIntersecting){
+    const id=e.target.id;
+    catBtns.forEach(b=>b.classList.toggle('active',b.dataset.target===id));
+  }});
+},{rootMargin:'-30% 0px -60% 0px'});
+groups.forEach(g=>spy.observe(g));
+
+/* ---- side menu ---- */
+const sideMenu=document.getElementById('sideMenu');
+const overlay=document.getElementById('menuOverlay');
+const menuBtn=document.getElementById('menuBtn');
+function openMenu(){sideMenu.classList.add('open');overlay.classList.add('open');sideMenu.setAttribute('aria-hidden','false');menuBtn.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+function closeMenu(){sideMenu.classList.remove('open');overlay.classList.remove('open');sideMenu.setAttribute('aria-hidden','true');menuBtn.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+menuBtn.onclick=openMenu;
+document.getElementById('menuClose').onclick=closeMenu;
+overlay.onclick=closeMenu;
+addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
+
+/* populate FAQ topics into side menu; clicking jumps to the group and closes */
+const smFaq=document.getElementById('smFaq');
+FAQ.forEach((g,i)=>{
+  const a=document.createElement('a');
+  a.innerHTML=`${g.cat}`;
+  a.onclick=()=>{closeMenu();setTimeout(()=>document.getElementById('fg'+i).scrollIntoView({behavior:'smooth',block:'start'}),260);};
+  smFaq.appendChild(a);
+});
+/* explore links also close the menu */
+document.querySelectorAll('.sm-link').forEach(l=>l.addEventListener('click',()=>setTimeout(closeMenu,40)));
+
+/* nav shadow */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('stuck',scrollY>20));
+
+/* reveal on scroll */
+const rev=new IntersectionObserver((es)=>{
+  es.forEach((e,i)=>{if(e.isIntersecting){e.target.classList.add('in');rev.unobserve(e.target);}});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>rev.observe(el));
+
+/* ---- page search ---- */
+// Build a search index: main sections + every Q&A item.
+const SECTION_INDEX = [
+  {cat:'Section', title:'Why Bilibili', target:'#why', text:'platform overview daily active users under 35 watch time creator made content danmu bullet comments triple support like coin favorite member exam founded nasdaq global audience content categories knowledge education technology ai lifestyle food fashion music gaming animation'},
+  {cat:'Section', title:'Creator benefits', target:'#benefits', text:'verified status yellow v custom handle launch traffic boost homepage recommendation dedicated operations team support early access insider perks beta features events'},
+  {cat:'Section', title:'How to join', target:'#process', text:'submit application qualification review platform review sign agreement onboarding complete steps timeline 3-5 business days process'},
+  {cat:'Section', title:'Personalized support', target:'#winning', text:'first week playbook manager support self intro video hook posting schedule engagement personalized discord help'},
+  {cat:'Section', title:'Creator stories', target:'#stories', text:'international creators interviews spotlights shoto jayus steve vtuber comedy reaction reviews testimonials'},
+  {cat:'Section', title:'Monetization', target:'#earn', text:'creator incentive plan revenue commerce affiliate cps commission taobao jd charging plan subscriptions 70% huahuo brand collaboration marketplace earnings money payout'},
+  {cat:'Section', title:'What we help with', target:'#support', text:'account setup profile optimization bio translation content strategy analytics performance copyright protection anti piracy identity verification yellow v monetization consulting'},
+];
+
+let SEARCH_INDEX = [...SECTION_INDEX];
+// add FAQ items (each links to its group, opens the matching accordion)
+FAQ.forEach((g,gi)=>{
+  g.items.forEach((it,ii)=>{
+    SEARCH_INDEX.push({cat:'Q&A · '+g.cat, title:it.q, text:it.q+' '+it.a, target:'#fg'+gi, qIndex:{g:gi,i:ii}});
+  });
+});
+
+const sOverlay=document.getElementById('searchOverlay');
+const sInput=document.getElementById('searchInput');
+const sResults=document.getElementById('searchResults');
+function openSearch(){sOverlay.classList.add('open');sOverlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(()=>sInput.focus(),60);}
+function closeSearch(){sOverlay.classList.remove('open');sOverlay.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+document.getElementById('searchBtn').onclick=openSearch;
+document.getElementById('searchClose').onclick=closeSearch;
+sOverlay.addEventListener('click',e=>{if(e.target===sOverlay)closeSearch();});
+addEventListener('keydown',e=>{
+  if((e.key==='/'||((e.metaKey||e.ctrlKey)&&e.key==='k')) && !sOverlay.classList.contains('open')){
+    const t=e.target.tagName; if(t!=='INPUT'&&t!=='TEXTAREA'){e.preventDefault();openSearch();}
+  }
+  if(e.key==='Escape'&&sOverlay.classList.contains('open'))closeSearch();
+});
+
+function escapeHtml(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+function highlight(text,q){
+  const safe=escapeHtml(text);
+  if(!q)return safe;
+  const re=new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig');
+  return safe.replace(re,'<mark>$1</mark>');
+}
+function snippetAround(text,q){
+  const low=text.toLowerCase(),pos=low.indexOf(q.toLowerCase());
+  if(pos<0)return text.slice(0,110)+(text.length>110?'…':'');
+  const start=Math.max(0,pos-40);
+  return (start>0?'…':'')+text.slice(start,start+130)+(start+130<text.length?'…':'');
+}
+
+function runSearch(q){
+  q=q.trim();
+  if(!q){sResults.innerHTML='<div class="search-hint">Start typing to search across the whole page — sections and every Q&amp;A.</div>';return;}
+  const terms=q.toLowerCase().split(/\s+/);
+  const scored=[];
+  SEARCH_INDEX.forEach(item=>{
+    const hay=(item.title+' '+item.text).toLowerCase();
+    let score=0,allMatch=true;
+    terms.forEach(t=>{
+      if(item.title.toLowerCase().includes(t))score+=5;
+      const idx=hay.indexOf(t);
+      if(idx>=0)score+=2; else allMatch=false;
+    });
+    if(allMatch&&score>0)scored.push({item,score});
+  });
+  scored.sort((a,b)=>b.score-a.score);
+  if(!scored.length){
+    sResults.innerHTML=`<div class="search-empty">No matches for “${escapeHtml(q)}”. Try a simpler keyword like “payout”, “handle”, or “copyright”.</div>`;
+    return;
+  }
+  const firstTerm=terms[0];
+  let html=`<div class="sr-count">${scored.length} result${scored.length>1?'s':''}</div>`;
+  scored.slice(0,12).forEach(({item})=>{
+    const snip=item.cat.startsWith('Q&A')?snippetAround(item.text.replace(item.title,'').trim(),firstTerm):snippetAround(item.text,firstTerm);
+    html+=`<button class="sr-item" data-target="${item.target}" ${item.qIndex?`data-qg="${item.qIndex.g}" data-qi="${item.qIndex.i}"`:''}>
+      <div class="sr-cat">${escapeHtml(item.cat)}</div>
+      <div class="sr-title">${highlight(item.title,firstTerm)}</div>
+      <div class="sr-snip">${highlight(snip,firstTerm)}</div>
+    </button>`;
+  });
+  sResults.innerHTML=html;
+  sResults.querySelectorAll('.sr-item').forEach(btn=>{
+    btn.onclick=()=>{
+      const target=btn.dataset.target;
+      const qg=btn.dataset.qg, qi=btn.dataset.qi;
+      closeSearch();
+      setTimeout(()=>{
+        const el=document.querySelector(target);
+        if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+        // open the matching FAQ accordion and flash it
+        if(qg!==undefined){
+          const group=document.getElementById('fg'+qg);
+          const det=group.querySelectorAll('.qa')[qi];
+          if(det){det.open=true;
+            setTimeout(()=>det.scrollIntoView({behavior:'smooth',block:'center'}),300);
+            det.style.transition='box-shadow .3s';det.style.boxShadow='0 0 0 3px rgba(251,114,153,.4)';
+            setTimeout(()=>det.style.boxShadow='',1600);
+          }
+        }
+      },240);
+    };
+  });
+}
+sInput.addEventListener('input',e=>runSearch(e.target.value));
+
+/* ---- smooth scroll for every in-page anchor (nav, footer, etc.) ---- */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href');
+    if(id.length<2)return;
+    const el=document.querySelector(id);
+    if(!el)return;
+    e.preventDefault();
+    el.scrollIntoView({behavior:'smooth',block:'start'});
+    history.replaceState(null,'',id);
+  });
+});
+
+</script>
+</body>
+</html>
